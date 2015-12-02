@@ -1,0 +1,9 @@
+<resources>
+<item name="fillcolor_00f000" type="color">#00f000</item>
+<item name="fillcolor_ff0000" type="color">#ff0000</item>
+<item name="fillcolor_f0f000" type="color">#f0f000</item>
+<item name="fillcolor_00f0f0" type="color">#00f0f0</item>
+<item name="fillcolor_0000f0" type="color">#0000f0</item>
+<item name="fillcolor_000000" type="color">#000000</item>
+<item name="fillcolor_f00000" type="color">#f00000</item>
+</resources>

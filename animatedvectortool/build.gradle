@@ -1,0 +1,38 @@
+apply plugin: 'java'
+
+version = '0.1'
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+//create a single Jar with all dependencies
+task fatJar(type: Jar) {
+
+        manifest {
+            attributes 'Implementation-Title': 'Animated Vector Tool',
+                    'Implementation-Version': version,
+                    'Main-Class': 'com.android2ee.java.tool.animatedvector.morphing.Main'
+        }
+
+    baseName = project.name
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+task uploadArchives {
+    repositories {
+        flatDir {
+            dirs 'repos'
+        }
+    }
+}
+//Get dependencies from Maven central repository
+repositories {
+    mavenCentral()
+}
+
+//Project dependencies
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    // Unit testing dependencies
+    testCompile 'junit:junit:4.12'
+
+}

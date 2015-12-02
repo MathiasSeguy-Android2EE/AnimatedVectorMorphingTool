@@ -1,0 +1,45 @@
+/**
+ * <ul>
+ * <li>======================================================</li>
+ * <p/>
+ * <li>Projet : Android2EE Project</li>
+ * <li>Produit par MSE.</li>
+ * </ul>
+ * Android Tutorial, An <strong>Android2EE</strong>'s project.</br>
+ * Produced by <strong>Dr. Mathias SEGUY</strong>.</br>
+ * Delivered by <strong>http://android2ee.com/</strong></br>
+ * Belongs to <strong>Mathias Seguy</strong></br>
+ * ***************************************************************************************************************</br>
+ * This code is free for any usage at your own risk, see the licence.</br>
+ * The distribution is reserved to the site <strong>http://android2ee.com</strong>.</br>
+ * The intelectual property belongs to <strong>Mathias Seguy</strong>.</br>
+ * <em>http://www.android2ee.com/About/Mathias-Seguy-Fondateur.html</em></br> </br>
+ * <p/>
+ * *****************************************************************************************************************</br>
+ * Ce code est libre de toute utilisation à vos propres risque, regarder la licence.</br>
+ * Sa distribution est reservée au site <strong>http://android2ee.com</strong>.</br>
+ * Sa propriété intellectuelle appartient à <strong>Mathias Seguy</strong>.</br>
+ * <em>http://www.android2ee.com/About/Mathias-Seguy-Fondateur.html</em></br> </br>
+ * *****************************************************************************************************************</br>
+ * <p/>
+ * <p/>
+ * This code use the library done by bonnyfone :https://github.com/bonnyfone
+ * This guy has the right to copy paste the code below, do what he wants to it,
+ * because the great job is done by his project
+ * I am just adapting it to android for a fun experience
+ */
+package com.android2ee.java.tool.animatedvector.morphing;
+
+import org.junit.Test;
+
+import static org.junit.Assert.assertTrue;
+
+
+public class MainTest {
+    @Test
+    public void mainTest(){
+        assertTrue(true);
+
+    }
+
+}
