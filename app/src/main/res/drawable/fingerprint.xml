@@ -15,11 +15,13 @@
        
         android:pathData="@string/init_path_firstfingerprint"
         android:strokeColor="#000000"
+        android:strokeWidth="1"
 />
 <path
     android:name="second"
        
         android:pathData="@string/init_path_secondfingerprint"
         android:strokeColor="#0000f0"
+        android:strokeWidth="1"
 />
 </vector>

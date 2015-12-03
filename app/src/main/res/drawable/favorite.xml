@@ -16,11 +16,13 @@
        
         android:pathData="@string/init_path_firstfavorite"
         android:strokeColor="#f00000"
+        android:strokeWidth="1"
 />
 <path
     android:name="second"
        
         android:pathData="@string/init_path_secondfavorite"
         android:strokeColor="#f00000"
+        android:strokeWidth="1"
 />
 </vector>

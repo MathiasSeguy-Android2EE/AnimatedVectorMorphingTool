@@ -7,12 +7,13 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LevelListDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
-    LinearLayoutScreenRecorder llScreenRecorder;
+//    LinearLayoutScreenRecorder llScreenRecorder;
     /**
      * The ImageViews
      */
@@ -38,13 +39,17 @@ public class MainActivity extends AppCompatActivity {
      * A CallBack to know when the animation of the VectorDrawable is over
      */
     Animatable2.AnimationCallback animationCallback;
+    /**
+     * The handler to automaticly launch the next animation
+     */
+    Handler uiHandler;
+    /**
+     * The Runnable that launches the next animation
+     */
+    Runnable uiRunnable;
     /***********************************************************
      * Managing RoundTrip animation (VectorDrawable1 to VectorDrawable 2 and back again
      **********************************************************
-     /**
-     * A CallBack to know when the animation of the VectorDrawable is over
-     */
-    Animatable2.AnimationCallback animationBackupCallback;
     /**
      * The LevelList that contains only two AnimatedVectorDrawable,
      * the ones used to go from on to the other
@@ -63,11 +68,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        llScreenRecorder= (LinearLayoutScreenRecorder) findViewById(R.id.llDrawableScreenRecorder);
 
         //managing the levelList to chain animations
         //----------------------------------------------
-        animatedVectorListMaxLevel = 4;//can not be compute, you have to set it yourself!!!
+        animatedVectorListMaxLevel = 4;//TODO can not be compute, you have to set it yourself!!!
         //define the animation call back
         animationCallback = new Animatable2.AnimationCallback() {
             @Override
@@ -86,18 +90,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 launchAnimVectorList();
             }
-        });
+        });uiRunnable=new Runnable() {
+            @Override
+            public void run() {
+                launchAnimVectorList();
+            }
+        };
+        uiHandler=new Handler();
 
         //managing the round trip scenario
         //--------------------------------
-        //define the animation callback
-        animationBackupCallback= new Animatable2.AnimationCallback() {
-            @Override
-            public void onAnimationEnd(Drawable drawable) {
-                super.onAnimationEnd(drawable);
-                updateBackupDrawable();
-            }
-        };
         //instantiate drawable and imageView
         imageView2 = (ImageView) findViewById(R.id.imageView2);
         backupRoundTrip = (LevelListDrawable) imageView2.getDrawable();
@@ -131,11 +133,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
     @Override
     protected void onPause() {
         super.onPause();
-        llScreenRecorder.stopRecording();
+        //and insure your remove every runnable from the handler (memory leak else)
+        uiHandler.removeCallbacks(uiRunnable);
+//        llScreenRecorder.stopRecording();
     }
+
     /***********************************************************
      *  Managing LevelListDrawable to chain animations
      **********************************************************/
@@ -144,10 +152,7 @@ public class MainActivity extends AppCompatActivity {
      * Launch the animation on the ImageView1
      * And update the level of the drawable
      */
-    @TargetApi(Build.VERSION_CODES.M)
     private void launchAnimVectorList() {
-        // start recording the layout
-        llScreenRecorder.startRecording();
         //the goal is to run the animation and when the animation is over
         // update the level of the currentAnimatedVectorFromList
         currentAnimatedVectorFromList.start();
@@ -156,13 +161,11 @@ public class MainActivity extends AppCompatActivity {
         currentAnimatedVectorFromList.registerAnimationCallback(animationCallback);
         //if you want to be compatible with level 21: use handler and runnable :'(
     }
-
     /**
      * Increment the Level if you don't have reach your max
      * Update the currentAnimatedVectorFromList
      */
     private void updateAnimVectorListLevel() {
-        llScreenRecorder.stopRecording();
         //first unregister the callback
         currentAnimatedVectorFromList.unregisterAnimationCallback(animationCallback);
         //update the level
@@ -179,51 +182,49 @@ public class MainActivity extends AppCompatActivity {
         //it seems that reset doesn't reset also the stroke anf fill color :(
         //https://code.google.com/p/android/issues/detail?id=195999
         currentAnimatedVectorFromList.reset();
-        launchAnimVectorList();
+        //launch it again in 300 ms
+        uiHandler.postDelayed(uiRunnable,300);
     }
 
     /***********************************************************
      *  Managing backup button round trip
      **********************************************************/
+    boolean backupRoundTripFirstLaunched=true;
     /**
      * Launch the animation on the currentAnimatedVectorDrawable
      */
     private void launchAnimBackup(){
+        if(!backupRoundTripFirstLaunched) {
+            if (backupRoundTrip.getLevel() == 1) {
+                //then reverse
+                backupRoundTrip.setLevel(0);
+            } else {
+                //then reverse
+                backupRoundTrip.setLevel(1);
+            }
+        }else{
+            backupRoundTripFirstLaunched=false;
+        }
+        //find the current AnimatedVectorDrawable displayed
+        currentBackupDrawable = (AnimatedVectorDrawable) backupRoundTrip.getCurrent();
         //the goal is to run the animation and when the animation is over
         // update the level of the currentAnimatedVectorFromList
         currentBackupDrawable.start();
         //then calculate when the animation is over
-        //only works for level 23 (damn it)
-        currentBackupDrawable.registerAnimationCallback(animationBackupCallback);
+        //the way to work for level 21
+        //uiHandler.postDelayed(uiRunnable, 3032);//Here you need to take your animation time and add 32ms
         //if you want to be compatible with level 21: use handler and runnable :'(
-
     }
 
-    private void updateBackupDrawable(){
-        //first unregister the callback
-        currentBackupDrawable.unregisterAnimationCallback(animationBackupCallback);
-        //update the level
-        if (backupRoundTrip.getLevel() ==1) {
-            //then reverse
-            backupRoundTrip.setLevel(0);
-        } else {
-            //then reverse
-            backupRoundTrip.setLevel(1);
-        }
-        //find the current AnimatedVectorDrawable displayed
-        currentBackupDrawable = (AnimatedVectorDrawable) backupRoundTrip.getCurrent();
-        //then go back to its initial level (reset it state) else
-        //it seems that reset doesn't reset also the stroke anf fill color :(
-        //https://code.google.com/p/android/issues/detail?id=195999
-        currentBackupDrawable.reset();
-    }
     /***********************************************************
      * Launching simple animation on AnimatedVectorDrawable
      **********************************************************/
-    /**
+  /**
      * Launch the animation on the AnimatedVectorDrawable displayed by the imageView3
      */
     private void launchAnim3() {
+
+//            llScreenRecorder.startRecording();
         animatedVector3.start();
     }
 

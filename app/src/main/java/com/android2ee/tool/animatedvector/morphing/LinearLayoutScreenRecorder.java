@@ -291,6 +291,7 @@ public class LinearLayoutScreenRecorder extends LinearLayout {
             String pictureFolderName = getContext().getString(R.string.app_name);
             //then create the subfolder
             mRootFolder = new File(filesDir, pictureFolderName);
+
             //Check if this subfolder exists
             if (!mRootFolder.exists()) {
                 //if it doesn't create it
