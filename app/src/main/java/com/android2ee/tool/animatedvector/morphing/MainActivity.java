@@ -1,9 +1,7 @@
 package com.android2ee.tool.animatedvector.morphing;
 
 import android.annotation.TargetApi;
-import android.graphics.drawable.Animatable2;
 import android.graphics.drawable.AnimatedVectorDrawable;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LevelListDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,8 +10,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 
+/**
+ * This class aims to show you the code to use to animated your AnimatedVectorDrawables
+ * enjoy
+ * (by the way the bug id is https://code.google.com/p/android/issues/detail?id=195999)
+ */
 public class MainActivity extends AppCompatActivity {
-//    LinearLayoutScreenRecorder llScreenRecorder;
     /**
      * The ImageViews
      */
@@ -36,10 +38,6 @@ public class MainActivity extends AppCompatActivity {
      */
     int animatedVectorListMaxLevel = 0;
     /**
-     * A CallBack to know when the animation of the VectorDrawable is over
-     */
-    Animatable2.AnimationCallback animationCallback;
-    /**
      * The handler to automaticly launch the next animation
      */
     Handler uiHandler;
@@ -47,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
      * The Runnable that launches the next animation
      */
     Runnable uiRunnable;
+    /**
+     * To know is the animation have been already launched
+     */
+    boolean animatedVectorFirstLaunched=true;
     /***********************************************************
      * Managing RoundTrip animation (VectorDrawable1 to VectorDrawable 2 and back again
      **********************************************************
@@ -59,6 +61,10 @@ public class MainActivity extends AppCompatActivity {
      * The current AnimatedVector diaplsyed by the RoundTrip
      */
     AnimatedVectorDrawable currentBackupDrawable;
+    /**
+     * To know is the animation have been already launched
+     */
+    boolean backupRoundTripFirstLaunched=true;
 
     /***********************************************************
      * Managing LifeCycle
@@ -72,14 +78,6 @@ public class MainActivity extends AppCompatActivity {
         //managing the levelList to chain animations
         //----------------------------------------------
         animatedVectorListMaxLevel = 4;//TODO can not be compute, you have to set it yourself!!!
-        //define the animation call back
-        animationCallback = new Animatable2.AnimationCallback() {
-            @Override
-            public void onAnimationEnd(Drawable drawable) {
-                super.onAnimationEnd(drawable);
-                updateAnimVectorListLevel();
-            }
-        };
         //instantiate drawable and imageView
         imageView1 = (ImageView) findViewById(R.id.imageView1);
         animatedVectorList = (LevelListDrawable) imageView1.getDrawable();
@@ -153,43 +151,28 @@ public class MainActivity extends AppCompatActivity {
      * And update the level of the drawable
      */
     private void launchAnimVectorList() {
-        //the goal is to run the animation and when the animation is over
-        // update the level of the currentAnimatedVectorFromList
-        currentAnimatedVectorFromList.start();
-        //then calculate when the animation is over
-        //only works for level 23 (damn it)
-        currentAnimatedVectorFromList.registerAnimationCallback(animationCallback);
-        //if you want to be compatible with level 21: use handler and runnable :'(
-    }
-    /**
-     * Increment the Level if you don't have reach your max
-     * Update the currentAnimatedVectorFromList
-     */
-    private void updateAnimVectorListLevel() {
-        //first unregister the callback
-        currentAnimatedVectorFromList.unregisterAnimationCallback(animationCallback);
-        //update the level
-        if (animatedVectorList.getLevel() < animatedVectorListMaxLevel) {
-            //then increment
-            animatedVectorList.setLevel(animatedVectorList.getLevel() + 1);
-            currentAnimatedVectorFromList = (AnimatedVectorDrawable) animatedVectorList.getCurrent();
-        } else {
-            //go back to the beginning
-            animatedVectorList.setLevel(0);
-            currentAnimatedVectorFromList = (AnimatedVectorDrawable) animatedVectorList.getCurrent();
+        if(!animatedVectorFirstLaunched) {
+            if (animatedVectorList.getLevel() < animatedVectorListMaxLevel) {
+                //then increment
+                animatedVectorList.setLevel(animatedVectorList.getLevel() + 1);
+                currentAnimatedVectorFromList = (AnimatedVectorDrawable) animatedVectorList.getCurrent();
+            } else {
+                //go back to the beginning
+                animatedVectorList.setLevel(0);
+                currentAnimatedVectorFromList = (AnimatedVectorDrawable) animatedVectorList.getCurrent();
+            }
+        }else {
+            animatedVectorFirstLaunched=false;
         }
-        //then go back to its initial level (reset it state) else
-        //it seems that reset doesn't reset also the stroke anf fill color :(
-        //https://code.google.com/p/android/issues/detail?id=195999
-        currentAnimatedVectorFromList.reset();
-        //launch it again in 300 ms
-        uiHandler.postDelayed(uiRunnable,300);
+        //start the animation on the current element
+        currentAnimatedVectorFromList.start();
+        //launch it again in 300 ms + the time your animation take
+        uiHandler.postDelayed(uiRunnable,300+3000);//TODO instead of 3000 set your animation duration !!! 
     }
 
     /***********************************************************
      *  Managing backup button round trip
      **********************************************************/
-    boolean backupRoundTripFirstLaunched=true;
     /**
      * Launch the animation on the currentAnimatedVectorDrawable
      */
@@ -207,13 +190,8 @@ public class MainActivity extends AppCompatActivity {
         }
         //find the current AnimatedVectorDrawable displayed
         currentBackupDrawable = (AnimatedVectorDrawable) backupRoundTrip.getCurrent();
-        //the goal is to run the animation and when the animation is over
-        // update the level of the currentAnimatedVectorFromList
+        //start the animation
         currentBackupDrawable.start();
-        //then calculate when the animation is over
-        //the way to work for level 21
-        //uiHandler.postDelayed(uiRunnable, 3032);//Here you need to take your animation time and add 32ms
-        //if you want to be compatible with level 21: use handler and runnable :'(
     }
 
     /***********************************************************
@@ -223,7 +201,6 @@ public class MainActivity extends AppCompatActivity {
      * Launch the animation on the AnimatedVectorDrawable displayed by the imageView3
      */
     private void launchAnim3() {
-
 //            llScreenRecorder.startRecording();
         animatedVector3.start();
     }
