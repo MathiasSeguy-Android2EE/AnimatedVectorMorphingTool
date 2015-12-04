@@ -1,12 +1,14 @@
 AnimatedVectorMorphingTool
 ==========================
-Download it! [ ![Download](http://www.android2ee.com/images/stories/AnimatedVectorMorphingTool/Downloads2.png) ](http://www.android2ee.com/images/stories/AnimatedVectorMorphingTool/animatedvectortool-0.1.jar)
----------------
+![Download](http://www.android2ee.com/images/stories/AnimatedVectorMorphingTool/Downloads2.png)[Download it!  ![Download](http://www.android2ee.com/images/stories/AnimatedVectorMorphingTool/Downloads2.png) ](http://www.android2ee.com/images/stories/AnimatedVectorMorphingTool/animatedvectortool-0.1.jar)    
+=====
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-AnimatedVectorMorphingTool-green.svg?style=true)](https://android-arsenal.com/details/1/2869)
+    
 
 **AnimatedVectorMorphingTool**  is a command line tool which generates, for you, all the files needed to animate your VectorDrawable. You just drop your VectorDrawables (you can drop n files) and it generates all the files needed for your android project in a res folder. You just have to copy paste this folder into your own project and run your application.           
-<img src="http://www.android2ee.com/images/stories/AnimatedVectorMorphingTool/video_small.gif"><img src="http://www.android2ee.com/images/stories/AnimatedVectorMorphingTool/QueuedAnimGQ2.gif">  <img src="http://www.android2ee.com/images/stories/AnimatedVectorMorphingTool/RoundTrip.gif">   <img src="http://www.android2ee.com/images/stories/AnimatedVectorMorphingTool/normal.gif">  
+<img src="http://www.android2ee.com/images/stories/AnimatedVectorMorphingTool/QueuedAnimGQ2.gif" width="220px">  <img src="http://www.android2ee.com/images/stories/AnimatedVectorMorphingTool/video_small.gif" width="220px">  <img src="http://www.android2ee.com/images/stories/AnimatedVectorMorphingTool/RoundTrip.gif" width="220px">   
 
-<img src="http://www.android2ee.com/images/stories/AnimatedVectorMorphingTool/AndroidToBackup.gif"> <img src="http://www.android2ee.com/images/stories/AnimatedVectorMorphingTool/QueuedAnim.gif">     
+<img src="http://www.android2ee.com/images/stories/AnimatedVectorMorphingTool/AndroidToBackup.gif"> <img src="http://www.android2ee.com/images/stories/AnimatedVectorMorphingTool/normal.gif" width="220px">  <img src="http://www.android2ee.com/images/stories/AnimatedVectorMorphingTool/QueuedAnim.gif">     
 It also generates a Java class exemple (and its associated layout), for you to quickly copy-paste the code in you own Activity to run you animations.    
 **It generates several scenarios: **
 >-**Simple one**: for each pair of files (in order) it generates the appropriates files to animate from one to the other;    
@@ -43,6 +45,8 @@ Running this command line will generates 3 scenarios:
 >-**Simple one** based on the AnimatedVectorDrawable called animated_android which allows you to make a morphing from Android to backup.    
 >-**The queue animations** based on the file  animated_levellist which allows you to make morphings from android to backup to android to backup... and so on    
 >-**The roundTrip**:  based on animated_android_roundtrip which allows you to make morphings from android to backup and back to android.    
+
+
 With two files the differrence between queue and roundtrip is not obvious.    
 So let's see what happens when you use more than two files:     
 ```
@@ -211,13 +215,14 @@ It makes a real better effect.
 
 The way I use the tool    
 ==================
-<-First I have my SVG picture    
-<-Then I go on InLoop: http://inloop.github.io/svg2android/ to convert them and I ensure not to generate compatible elements    
-<-I save those file in my folder "xml root" and copy them (also) in my working directory. let's call those files (in the working directory) working files.    
-<-I open each file, delete the first charcter of the file "<" and replace it with the same "<" (becasue inLoop generates a bad char that broke the xml parsing using Sax, don't know why) and I add my xml tag android:morphingName and android:name on each path I want to morph    
-<-Then I run the tool on those files (in my working directory) and I copy paste the elements in my Android project    
-<-I look at what happens and I go back to my working files to enhance them, splitting some paths, adding fillColor or Stroke color, I run the tool again, copy-paste, look, enhance    
-As generating the new files take several second, looking at what happens and enhance the working file is really easy and fast.    
+>-First I have my SVG picture    
+>-Then I go on InLoop: http://inloop.github.io/svg2android/ to convert them and I ensure not to generate compatible elements    
+>-I save those file in my folder "xml root" and copy them (also) in my working directory. let's call those files (in the working directory) working files.    
+>-I open each working file, delete the first charcter of the file "<" and replace it with the same "<" (because inLoop generates a bad char that brokes the xml parsing using Sax, don't know why) and I add my xml tag android:morphingName and android:name on each path I want to morph    
+>-Then I run the tool on those files (in my working directory) and I copy paste the elements in my Android project    
+>-I look at what happens (running the application) and I go back to my working files to enhance them, splitting some paths, adding fillColor or Stroke color, I run the tool again, copy-paste, look, enhance    
+
+As generating the new files take several seconds, looking at what happens and enhance the working files is really easy and fast.    
 Hope you'll enjoy it.    
 
 And at last : thanks to https://stackedit.io/editor, because markup is hell without.
