@@ -17,7 +17,7 @@
         android:propertyName="fillColor"
         android:valueType="intType"
         android:valueFrom="@color/translucent"
-        android:valueTo="@color/fillcolor_00f000"
+        android:valueTo="@color/fillcolor_0000f0"
 />
 <objectAnimator
         android:duration="1"
@@ -26,6 +26,6 @@
         android:propertyName="strokeColor"
         android:valueType="intType"
         android:valueFrom="@color/strokecolor_000000"
-        android:valueTo="@color/strokecolor_00f000"
+        android:valueTo="@color/translucent"
 />
 </set>

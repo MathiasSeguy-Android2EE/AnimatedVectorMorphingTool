@@ -221,8 +221,9 @@ public class ResultGenerator extends ResultTemplates {
     private void generateRoundTripVectorDrawable() throws IOException {
         CustomLogger.log("Generating the following file " + animatedVectorRoundTrip);
         //for each vector generate the appropriated LevelList Drawable
+        //do not do it with the last element
         String fileName;
-        for(int i=0;i<vectors.size();i++) {
+        for(int i=0;i<vectors.size()-1;i++) {
             currentVectorFileName = vectors.get(i).getFileName();
             File animatedRoundTripVectorFile = new File(drawableFolder, animatedVectorRoundTrip.replace("#fileName",currentVectorFileName));
             BufferedWriter animatedRoundTripBW = createIt(animatedRoundTripVectorFile);

@@ -9,4 +9,5 @@
 <item name="fillcolor_f0f000" type="color">#f0f000</item>
 <item name="strokecolor_000000" type="color">#000000</item>
 <item name="strokecolor_f00000" type="color">#f00000</item>
+<item name="fillcolor_0000f0" type="color">#0000f0</item>
 </resources>

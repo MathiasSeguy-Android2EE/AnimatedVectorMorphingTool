@@ -10,13 +10,4 @@
         android:valueFrom="@string/init_path_zerofingerprint"
         android:valueTo="@string/final_path_zerofingerprint"
 />
-<objectAnimator
-        android:duration="1"
-        android:startOffset="1500"
-        android:interpolator="@android:interpolator/linear"
-        android:propertyName="strokeColor"
-        android:valueType="intType"
-        android:valueFrom="@color/translucent"
-        android:valueTo="@color/strokecolor_ff0000"
-/>
 </set>

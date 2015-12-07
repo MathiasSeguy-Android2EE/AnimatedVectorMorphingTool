@@ -25,7 +25,7 @@
         android:interpolator="@android:interpolator/linear"
         android:propertyName="strokeColor"
         android:valueType="intType"
-        android:valueFrom="@color/strokecolor_00f000"
+        android:valueFrom="@color/translucent"
         android:valueTo="@color/strokecolor_0000f0"
 />
 </set>
