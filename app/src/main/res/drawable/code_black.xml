@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:width="24dp"
+    android:height="24dp"
+>
+<path
+    android:name="zero"
+       
+        android:pathData="@string/init_path_zerocode_black"
+/>
+<path
+    android:name="first"
+       
+        android:pathData="@string/init_path_firstcode_black"
+        android:fillColor="#0000f0"
+        android:strokeColor="#0000f0"
+        android:strokeWidth="1"
+/>
+<path
+    android:name="second"
+       
+        android:pathData="@string/init_path_secondcode_black"
+        android:strokeColor="#0000f0"
+/>
+</vector>

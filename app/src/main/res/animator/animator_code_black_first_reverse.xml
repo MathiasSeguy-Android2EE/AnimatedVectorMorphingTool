@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+<objectAnimator
+        android:duration="3000"
+        android:interpolator="@android:interpolator/linear"
+        android:repeatMode="reverse"
+        android:repeatCount="0"
+        android:propertyName="pathData"
+        android:valueType="pathType"
+        android:valueFrom="@string/final_path_firstcode_black"
+        android:valueTo="@string/init_path_firstcode_black"
+/>
+<objectAnimator
+        android:duration="1"
+        android:startOffset="1500"
+        android:interpolator="@android:interpolator/linear"
+        android:propertyName="fillColor"
+        android:valueType="intType"
+        android:valueFrom="@color/fillcolor_000000"
+        android:valueTo="@color/fillcolor_0000f0"
+/>
+<objectAnimator
+        android:duration="1"
+        android:startOffset="1500"
+        android:interpolator="@android:interpolator/linear"
+        android:propertyName="strokeColor"
+        android:valueType="intType"
+        android:valueFrom="@color/translucent"
+        android:valueTo="@color/strokecolor_0000f0"
+/>
+</set>

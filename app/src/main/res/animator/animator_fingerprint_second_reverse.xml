@@ -14,18 +14,9 @@
         android:duration="1"
         android:startOffset="1500"
         android:interpolator="@android:interpolator/linear"
-        android:propertyName="fillColor"
-        android:valueType="intType"
-        android:valueFrom="@color/fillcolor_00f000"
-        android:valueTo="@color/translucent"
-/>
-<objectAnimator
-        android:duration="1"
-        android:startOffset="1500"
-        android:interpolator="@android:interpolator/linear"
         android:propertyName="strokeColor"
         android:valueType="intType"
-        android:valueFrom="@color/translucent"
+        android:valueFrom="@color/strokecolor_0000f0"
         android:valueTo="@color/strokecolor_0000f0"
 />
 </set>

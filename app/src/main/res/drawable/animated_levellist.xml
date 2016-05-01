@@ -4,4 +4,15 @@
 <item android:maxLevel="2" android:drawable="@drawable/animated_explore" />
 <item android:maxLevel="3" android:drawable="@drawable/animated_favorite" />
 <item android:maxLevel="4" android:drawable="@drawable/animated_fingerprint" />
+<item android:maxLevel="5" android:drawable="@drawable/animated_code_black" />
+<item android:maxLevel="6" android:drawable="@drawable/animated_compare_arrows" />
+<item android:maxLevel="7" android:drawable="@drawable/animated_done_all" />
+<item android:maxLevel="8" android:drawable="@drawable/animated_done" />
+<item android:maxLevel="9" android:drawable="@drawable/animated_donut_small" />
+<item android:maxLevel="10" android:drawable="@drawable/animated_flight_land" />
+<item android:maxLevel="11" android:drawable="@drawable/animated_flight_takeoff" />
+<item android:maxLevel="12" android:drawable="@drawable/animated_grade_black" />
+<item android:maxLevel="13" android:drawable="@drawable/animated_hot_tub" />
+<item android:maxLevel="14" android:drawable="@drawable/animated_line_weight" />
+<item android:maxLevel="15" android:drawable="@drawable/animated_list_black" />
 </level-list>

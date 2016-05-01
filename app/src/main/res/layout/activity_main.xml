@@ -44,13 +44,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Reverse" />
+                android:text="RoundTrip" />
             <ImageView
                 android:id="@+id/imageView2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/animated_backup_roundtrip" />
+                android:src="@drawable/animated_list_black_roundtrip" />
         </LinearLayout>
 
         <LinearLayout
@@ -77,7 +77,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/animated_fingerprint" />
+                android:src="@drawable/animated_list_black" />
 
             <!--</com.android2ee.tool.animatedvector.morphing.LinearLayoutScreenRecorder>-->
 
@@ -85,14 +85,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="stroke only" />
+                android:text="VectorDrawable" />
 
             <ImageView
                 android:id="@+id/imageView4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/animated_favorite" />
+                android:src="@drawable/perm_identity" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

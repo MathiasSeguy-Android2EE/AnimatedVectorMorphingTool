@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+android:drawable="@drawable/flight_takeoff"
+>
+<target    android:name="zero"
+        android:animation="@animator/animator_flight_land_zero_reverse"
+/>
+<target    android:name="first"
+        android:animation="@animator/animator_flight_land_first_reverse"
+/>
+<target    android:name="second"
+        android:animation="@animator/animator_flight_land_second_reverse"
+/>
+</animated-vector>

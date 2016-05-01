@@ -19,11 +19,11 @@ public class MainActivity extends AppCompatActivity {
     /**
      * The ImageViews
      */
-    ImageView imageView1, imageView2, imageView3, imageView4;
+    ImageView imageView1, imageView2, imageView3;
     /**
      * Too simple AnimatedVectorDrawables for having a simple exemple
      */
-    AnimatedVectorDrawable  animatedVector3, animatedVector4;
+    AnimatedVectorDrawable  animatedVector3;
     /***********************************************************
      * Managing Level List: To chain animations
      **********************************************************/
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
         //managing the levelList to chain animations
         //----------------------------------------------
-        animatedVectorListMaxLevel = 4;//TODO can not be compute, you have to set it yourself!!!
+        animatedVectorListMaxLevel = 15;//TODO can not be compute, you have to set it yourself!!!
         //instantiate drawable and imageView
         imageView1 = (ImageView) findViewById(R.id.imageView1);
         animatedVectorList = (LevelListDrawable) imageView1.getDrawable();
@@ -115,8 +115,8 @@ public class MainActivity extends AppCompatActivity {
         //------------------------------------------
         imageView3 = (ImageView) findViewById(R.id.imageView3);
         animatedVector3 = (AnimatedVectorDrawable) imageView3.getDrawable();
-        imageView4 = (ImageView) findViewById(R.id.imageView4);
-        animatedVector4 = (AnimatedVectorDrawable) imageView4.getDrawable();
+//        imageView4 = (ImageView) findViewById(R.id.imageView4);
+//        animatedVector4 = (AnimatedVectorDrawable) imageView4.getDrawable();
         //set on click listener on them to launch animation
         imageView3.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,12 +124,12 @@ public class MainActivity extends AppCompatActivity {
                 launchAnim3();
             }
         });
-        imageView4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                launchAnim4();
-            }
-        });
+//        imageView4.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                launchAnim4();
+//            }
+//        });
     }
 
 
@@ -205,11 +205,5 @@ public class MainActivity extends AppCompatActivity {
         animatedVector3.start();
     }
 
-    /**
-     * Launch the animation on the AnimatedVectorDrawable displayed by the imageView4
-     */
-    private void launchAnim4() {
-        animatedVector4.start();
-    }
 
 }
