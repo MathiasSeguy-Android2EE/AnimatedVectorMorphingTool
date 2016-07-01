@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:viewportWidth="24.0"
+    android:viewportHeight="24.0"
+    android:width="24dp"
+    android:height="24dp"
+>
+<path
+    android:name="core"
+       
+        android:pathData="@string/init_path_coreic_check_box_outline_blank_black_24dp"
+        android:fillColor="#FFF00000"
+/>
+<path
+    android:name="secondPath"
+       
+        android:pathData="@string/init_path_secondPathic_check_box_outline_blank_black_24dp"
+        android:fillColor="#FFF00000"
+/>
+</vector>

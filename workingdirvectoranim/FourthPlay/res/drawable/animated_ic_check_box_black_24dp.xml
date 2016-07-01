@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+android:drawable="@drawable/ic_check_box_black_24dp"
+>
+<target    android:name="core"
+        android:animation="@animator/animator_ic_check_box_black_24dp_main"
+/>
+<target    android:name="secondPath"
+        android:animation="@animator/animator_ic_check_box_black_24dp_second"
+/>
+</animated-vector>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:viewportWidth="240"
+    android:viewportHeight="240"
+    android:width="240dp"
+    android:height="240dp"
+>
+<path
+    android:name="shape"
+       
+        android:pathData="@string/init_path_shapeic_arrow_back_black_24dp"
+        android:fillColor="#FF000000"
+/>
+</vector>

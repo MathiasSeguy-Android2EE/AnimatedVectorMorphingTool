@@ -1,1 +1,1 @@
-include ':app', ':animatedvectortool'
+include ':app', ':animatedvectortool', ':workingdirsimpletest'

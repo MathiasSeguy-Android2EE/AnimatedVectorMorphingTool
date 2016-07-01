@@ -1,0 +1,6 @@
+<resources>
+<item name="fillcolor_00f000" type="color">#00f000</item>
+<item name="fillcolor_f00000" type="color">#f00000</item>
+<item name="strokecolor_00f000" type="color">#00f000</item>
+<item name="translucent" type="color">#00000000</item>
+</resources>

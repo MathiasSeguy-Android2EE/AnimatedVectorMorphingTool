@@ -266,11 +266,12 @@ public class ResultTemplateJava {
                 "    android:layout_width=\"match_parent\"\n" +
                 "    android:layout_height=\"match_parent\"\n" +
                 "    android:orientation=\"vertical\"\n" +
-                "    android:paddingBottom=\"@dimen/activity_vertical_margin\"\n" +
-                "    android:paddingLeft=\"@dimen/activity_horizontal_margin\"\n" +
-                "    android:paddingRight=\"@dimen/activity_horizontal_margin\"\n" +
-                "    android:paddingTop=\"@dimen/activity_vertical_margin\"\n" +
+                "    android:paddingBottom=\"16dp\"\n" +
+                "    android:paddingLeft=\"16dp\"\n" +
+                "    android:paddingRight=\"16dp\"\n" +
+                "    android:paddingTop=\"16dp\"\n" +
                 "    tools:context=\".MainActivity\">\n" +
+                "<!--TODO You have to replace the name of the drawables below with your own -->"+
                 "\n" +
                 "    <TextView\n" +
                 "        android:layout_width=\"wrap_content\"\n" +
@@ -306,7 +307,7 @@ public class ResultTemplateJava {
                 "                android:layout_width=\"wrap_content\"\n" +
                 "                android:layout_height=\"wrap_content\"\n" +
                 "                android:layout_gravity=\"center\"\n" +
-                "                android:text=\"Reverse\" />\n" +
+                "                android:text=\"Roundtrip\" />\n" +
                 "\n" +
                 "            <ImageView\n" +
                 "                android:id=\"@+id/imageView2\"\n" +
@@ -340,14 +341,14 @@ public class ResultTemplateJava {
                 "                android:layout_width=\"wrap_content\"\n" +
                 "                android:layout_height=\"wrap_content\"\n" +
                 "                android:layout_gravity=\"center\"\n" +
-                "                android:text=\"stroke only\" />\n" +
+                "                android:text=\"reverse\" />\n" +
                 "\n" +
                 "            <ImageView\n" +
                 "                android:id=\"@+id/imageView4\"\n" +
                 "                android:layout_width=\"match_parent\"\n" +
                 "                android:layout_height=\"match_parent\"\n" +
                 "                android:layout_weight=\"1\"\n" +
-                "                android:src=\"@drawable/animated_favorite\" />\n" +
+                "                android:src=\"@drawable/animated_favorite_reverse\" />\n" +
                 "        </LinearLayout>\n" +
                 "    </LinearLayout>\n" +
                 "</LinearLayout>\n";

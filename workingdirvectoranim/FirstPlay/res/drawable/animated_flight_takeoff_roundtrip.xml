@@ -1,0 +1,4 @@
+<level-list xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:maxLevel="0" android:drawable="@drawable/animated_flight_takeoff" />
+<item android:maxLevel="1" android:drawable="@drawable/animated_flight_takeoff_reverse" />
+</level-list>

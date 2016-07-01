@@ -1,0 +1,3 @@
+<level-list xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:maxLevel="0" android:drawable="@drawable/animated_ic_check_box_black_24dp" />
+</level-list>
