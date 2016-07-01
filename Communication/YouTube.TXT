@@ -1,0 +1,10 @@
+                                 AndroidVectorMorphingTool : How to 
+The AndroidVectorMorphingTool project is a command line tool which generates, for you, all the files needed to animate your VectorDrawable. You just drop your VectorDrawables (you can drop n files) and it generates all the files needed for your android project in a res folder. You just have to copy paste this folder into your own project and run your application.   
+I want to show you how this project is working and how to use it
+So enjoy.
+
+
+AndroidVectorMorphingTool :Comment l'utiliser
+Le projet AndroidVectorMorphingTool est un outil en ligne de commande qui génère, pour vous, tous les fichiers nécessaires pour animer vos VectorDrawables. Vous déposez simplement vos VectorDrawables (vous pouvez déposer n fichiers) et il génère tous les fichiers nécessaires pour votre projet Android dans un res dossier. Vous avez juste à copier coller ce dossier dans votre propre projet et exécuter votre application.
+Je veux vous montrer comment ce projet fonctionne et comment l'utiliser.
+Alors profitez et faîtes vous plaisir.

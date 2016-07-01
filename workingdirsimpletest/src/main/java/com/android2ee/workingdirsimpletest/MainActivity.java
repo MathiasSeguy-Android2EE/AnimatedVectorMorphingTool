@@ -1,7 +1,5 @@
 package com.android2ee.workingdirsimpletest;
 
-import android.animation.AnimatorInflater;
-import android.animation.AnimatorSet;
 import android.annotation.TargetApi;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.LevelListDrawable;
@@ -9,7 +7,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -19,8 +16,6 @@ import android.widget.ImageView;
  * (by the way the bug id is https://code.google.com/p/android/issues/detail?id=195999)
  */
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "MainActivity";
-
     /**
      * The ImageViews
      */
@@ -28,11 +23,10 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Too simple AnimatedVectorDrawables for having a simple exemple
      */
-    AnimatedVectorDrawable animatedVector3, animatedVector4;
+    AnimatedVectorDrawable  animatedVector3, animatedVector4;
     /***********************************************************
      * Managing Level List: To chain animations
      **********************************************************/
-    AnimatorSet rotationAnimator;
     //The LevelListDrawable that contains all the AnimatedVectorDrawables
     LevelListDrawable animatedVectorList;
     /**
@@ -42,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * The max level of your LevelList animatedVectorList
      */
-    int animatedVectorListMaxLevel = 1;
+    int animatedVectorListMaxLevel = 0;
     /**
      * The handler to automaticly launch the next animation
      */
@@ -54,11 +48,11 @@ public class MainActivity extends AppCompatActivity {
     /**
      * To know is the animation have been already launched
      */
-    boolean animatedVectorFirstLaunched = true;
+    boolean animatedVectorFirstLaunched=true;
     /***********************************************************
      * Managing RoundTrip animation (VectorDrawable1 to VectorDrawable 2 and back again
-     * *********************************************************
-     * /**
+     **********************************************************
+    /**
      * The LevelList that contains only two AnimatedVectorDrawable,
      * the ones used to go from on to the other
      */
@@ -70,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * To know is the animation have been already launched
      */
-    boolean backupRoundTripFirstLaunched = true;
+    boolean backupRoundTripFirstLaunched=true;
 
     /***********************************************************
      * Managing LifeCycle
@@ -83,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
         //managing the levelList to chain animations
         //----------------------------------------------
-        animatedVectorListMaxLevel = 0;//TODO can not be compute, you have to set it yourself!!!
+        animatedVectorListMaxLevel = 4;//TODO can not be compute, you have to set it yourself!!!
         //instantiate drawable and imageView
         imageView1 = (ImageView) findViewById(R.id.imageView1);
         animatedVectorList = (LevelListDrawable) imageView1.getDrawable();
@@ -94,21 +88,20 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 launchAnimVectorList();
             }
-        });
-        uiRunnable = new Runnable() {
+        });uiRunnable=new Runnable() {
             @Override
             public void run() {
                 launchAnimVectorList();
             }
         };
-        uiHandler = new Handler();
+        uiHandler=new Handler();
 
         //managing the round trip scenario
         //--------------------------------
         //instantiate drawable and imageView
         imageView2 = (ImageView) findViewById(R.id.imageView2);
         backupRoundTrip = (LevelListDrawable) imageView2.getDrawable();
-        currentBackupDrawable = (AnimatedVectorDrawable) backupRoundTrip.getCurrent();
+        currentBackupDrawable= (AnimatedVectorDrawable) backupRoundTrip.getCurrent();
         //launch animation when the click is done on the imageView
         imageView2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,8 +109,7 @@ public class MainActivity extends AppCompatActivity {
                 launchAnimBackup();
             }
         });
-        rotationAnimator = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.animator_ic_check_box_black_24dp_main_rotate);
-        rotationAnimator.setTarget(imageView2);
+
 
         //managing simple animated vector drawable
         //------------------------------------------
@@ -141,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -158,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
      * And update the level of the drawable
      */
     private void launchAnimVectorList() {
-        if (!animatedVectorFirstLaunched) {
+        if(!animatedVectorFirstLaunched) {
             if (animatedVectorList.getLevel() < animatedVectorListMaxLevel) {
                 //then increment
                 animatedVectorList.setLevel(animatedVectorList.getLevel() + 1);
@@ -168,21 +161,27 @@ public class MainActivity extends AppCompatActivity {
                 animatedVectorList.setLevel(0);
                 currentAnimatedVectorFromList = (AnimatedVectorDrawable) animatedVectorList.getCurrent();
             }
-        } else {
-            animatedVectorFirstLaunched = false;
+        }else {
+            animatedVectorFirstLaunched=false;
         }
         //start the animation on the current element
         currentAnimatedVectorFromList.start();
         //launch it again in 300 ms + the time your animation take
-        uiHandler.postDelayed(uiRunnable, 300 + 3000);//TODO instead of 3000 set your animation duration !!!
+        uiHandler.postDelayed(uiRunnable,300+3000);//TODO instead of 3000 set your animation duration !!! 
     }
 
-    /***********************************************************
+  /***********************************************************
      *  Managing backup button round trip
      **********************************************************/
     /**
      * Launch the animation on the currentAnimatedVectorDrawable
+     * This solution used LevelList but there is a bug that occurs sometime
+     * Bug: The second animation is not played after 2 times it runs
+     * I mean you run it twice, the third times it doesn't animate anything...
+     * I hope the bug will be fixed one day
+     * So I changed the way to do the stuff, rename this method and set it as deprecated
      */
+    @Deprecated
     private void launchAnimBackupOld() {
         if (!backupRoundTripFirstLaunched) {
             currentBackupDrawable.stop();
@@ -199,21 +198,33 @@ public class MainActivity extends AppCompatActivity {
         }
         //find the current AnimatedVectorDrawable displayed
         currentBackupDrawable = (AnimatedVectorDrawable) backupRoundTrip.getCurrent();
-        Log.e(TAG, "Is currentBackupDrawable isRunning? " + currentBackupDrawable.isRunning());
         //start the animation
         currentBackupDrawable.start();
-        rotationAnimator.start();
     }
 
+    /**
+     * The reverse and the initial AnimatedDrawable
+     */
     AnimatedVectorDrawable reverse, initial;
+    /**
+     * To know which direction is used (reverse or not)
+     */
     boolean reverseState = false;
 
+    /**
+     * Launch the animation on the currentAnimatedVectorDrawable
+     * As the levellist solution (ahead) has a bug, I do it in a simple way
+     */
     private void launchAnimBackup() {
+        //initialize
         if (backupRoundTripFirstLaunched) {
             reverse = (AnimatedVectorDrawable) getResources().getDrawable(R.drawable.animated_ic_check_box_black_24dp_reverse, getTheme());
             initial = (AnimatedVectorDrawable) getResources().getDrawable(R.drawable.animated_ic_check_box_black_24dp, getTheme());
+            //if you want to avoid the color bug (animation not played on color at the second time)
+            //comment that line (ok it's memory consumption)
             backupRoundTripFirstLaunched=false;
         }
+        //set the drawable depending on the direction (reverse or not)
         if (reverseState) {
             //then reverse
             imageView2.setImageDrawable(reverse);
@@ -222,13 +233,14 @@ public class MainActivity extends AppCompatActivity {
             imageView2.setImageDrawable(initial);
         }
         reverseState=!reverseState;
+        //launch the animation
         ((AnimatedVectorDrawable) imageView2.getDrawable()).start();
     }
 
     /***********************************************************
      * Launching simple animation on AnimatedVectorDrawable
      **********************************************************/
-    /**
+  /**
      * Launch the animation on the AnimatedVectorDrawable displayed by the imageView3
      */
     private void launchAnim3() {

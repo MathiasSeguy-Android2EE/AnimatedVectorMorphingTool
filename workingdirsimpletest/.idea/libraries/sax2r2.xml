@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="sax2r2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../animatedvectortool/libs/sax2r2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

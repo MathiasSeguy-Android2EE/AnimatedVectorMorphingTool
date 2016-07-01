@@ -8,7 +8,7 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingTop="16dp"
-    tools:context=".MainActivity">
+    tools:context=".MainActivityOld">
 <!--TODO You have to replace the name of the drawables below with your own -->
     <TextView
         android:layout_width="wrap_content"

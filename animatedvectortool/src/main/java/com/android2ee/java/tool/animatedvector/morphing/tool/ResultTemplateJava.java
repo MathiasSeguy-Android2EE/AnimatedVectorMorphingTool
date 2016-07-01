@@ -211,14 +211,22 @@ public class ResultTemplateJava {
                 "        uiHandler.postDelayed(uiRunnable,300+3000);//TODO instead of 3000 set your animation duration !!! \n" +
                 "    }\n" +
                 "\n" +
-                "    /***********************************************************\n" +
+                "  /***********************************************************\n" +
                 "     *  Managing backup button round trip\n" +
                 "     **********************************************************/\n" +
                 "    /**\n" +
                 "     * Launch the animation on the currentAnimatedVectorDrawable\n" +
+                "     * This solution used LevelList but there is a bug that occurs sometime\n" +
+                "     * Bug: The second animation is not played after 2 times it runs\n" +
+                "     * I mean you run it twice, the third times it doesn't animate anything...\n" +
+                "     * I hope the bug will be fixed one day\n" +
+                "     * So I changed the way to do the stuff, rename this method and set it as deprecated\n" +
                 "     */\n" +
-                "    private void launchAnimBackup(){\n" +
-                "        if(!backupRoundTripFirstLaunched) {\n" +
+                "    @Deprecated\n" +
+                "    private void launchAnimBackupOld() {\n" +
+                "        if (!backupRoundTripFirstLaunched) {\n" +
+                "            currentBackupDrawable.stop();\n" +
+                "\n" +
                 "            if (backupRoundTrip.getLevel() == 1) {\n" +
                 "                //then reverse\n" +
                 "                backupRoundTrip.setLevel(0);\n" +
@@ -226,8 +234,8 @@ public class ResultTemplateJava {
                 "                //then reverse\n" +
                 "                backupRoundTrip.setLevel(1);\n" +
                 "            }\n" +
-                "        }else{\n" +
-                "            backupRoundTripFirstLaunched=false;\n" +
+                "        } else {\n" +
+                "            backupRoundTripFirstLaunched = false;\n" +
                 "        }\n" +
                 "        //find the current AnimatedVectorDrawable displayed\n" +
                 "        currentBackupDrawable = (AnimatedVectorDrawable) backupRoundTrip.getCurrent();\n" +
@@ -235,6 +243,40 @@ public class ResultTemplateJava {
                 "        currentBackupDrawable.start();\n" +
                 "    }\n" +
                 "\n" +
+                "    /**\n" +
+                "     * The reverse and the initial AnimatedDrawable\n" +
+                "     */\n" +
+                "    AnimatedVectorDrawable reverse, initial;\n" +
+                "    /**\n" +
+                "     * To know which direction is used (reverse or not)\n" +
+                "     */\n" +
+                "    boolean reverseState = false;\n" +
+                "\n" +
+                "    /**\n" +
+                "     * Launch the animation on the currentAnimatedVectorDrawable\n" +
+                "     * As the levellist solution (ahead) has a bug, I do it in a simple way\n" +
+                "     */\n" +
+                "    private void launchAnimBackup() {\n" +
+                "        //initialize\n" +
+                "        if (backupRoundTripFirstLaunched) {\n" +
+                "            reverse = (AnimatedVectorDrawable) getResources().getDrawable(R.drawable.animated_ic_check_box_black_24dp_reverse, getTheme());\n" +
+                "            initial = (AnimatedVectorDrawable) getResources().getDrawable(R.drawable.animated_ic_check_box_black_24dp, getTheme());\n" +
+                "            //if you want to avoid the color bug (animation not played on color at the second time)\n" +
+                "            //comment that line (ok it's memory consumption)\n" +
+                "            backupRoundTripFirstLaunched=false;\n" +
+                "        }\n" +
+                "        //set the drawable depending on the direction (reverse or not)\n" +
+                "        if (reverseState) {\n" +
+                "            //then reverse\n" +
+                "            imageView2.setImageDrawable(reverse);\n" +
+                "        } else {\n" +
+                "            //then reverse\n" +
+                "            imageView2.setImageDrawable(initial);\n" +
+                "        }\n" +
+                "        reverseState=!reverseState;\n" +
+                "        //launch the animation\n" +
+                "        ((AnimatedVectorDrawable) imageView2.getDrawable()).start();\n" +
+                "    }" +
                 "    /***********************************************************\n" +
                 "     * Launching simple animation on AnimatedVectorDrawable\n" +
                 "     **********************************************************/\n" +
